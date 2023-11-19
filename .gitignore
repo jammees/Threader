@@ -1,0 +1,11 @@
+# Project place file
+/Threader.rbxlx
+
+# Roblox Studio lock files
+/*.rbxlx.lock
+/*.rbxl.lock
+
+/docs
+/package-lock.json
+/package.json
+/node_modules

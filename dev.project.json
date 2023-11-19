@@ -1,0 +1,33 @@
+{
+  "name": "Threader Dev",
+  "globIgnorePaths": ["**/*.spec.lua"],
+  "tree": {
+    "$className": "DataModel",
+
+    "ReplicatedStorage": {
+      "Threader": {
+        "$path": "lib",
+
+        "Promise": { "$path": "vendors/Promise" }
+      },
+
+      "Benchmarks": {
+        "$path": "benchmark"
+      }
+    },
+    
+    "StarterPlayer": {
+      "StarterPlayerScripts": {
+        "ThreaderClient": {
+          "$path": "test/Client"
+        }
+      }
+    },
+    
+    "ServerScriptService": {
+      "ThreaderServer": {
+        "$path": "test/Server"
+      }
+    }
+  }
+}

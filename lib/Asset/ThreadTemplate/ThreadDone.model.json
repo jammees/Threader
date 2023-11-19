@@ -1,0 +1,6 @@
+{
+    "className": "BindableEvent",
+    "properties": {
+        "Name": "ThreadDone"
+    }
+}
