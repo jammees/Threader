@@ -7,9 +7,9 @@ for i = 1, 10000 do
 	workTable[i] = i
 end
 
-local startTime = os.clock()
+local t1 = os.clock()
 NumThreader:DoWork(workTable)
 	:andThen(function(results)
-		print(`[Server] Finished work in {os.clock() - startTime}`, results)
+		print(`[Server] Finished work in {os.clock() - t1}`, results)
 	end)
 	:catch(warn)
