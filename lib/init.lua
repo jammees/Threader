@@ -168,6 +168,8 @@ function Threader.DoWork(self: Threader, workData: { [any]: any })
 		for index, thread: Thread in self._Threads :: { Thread } do
 			threadPromises[#threadPromises + 1] = Promise.fromEvent(thread.ThreadDone.Event)
 				:andThen(function(returnCode: number, data)
+					Assert(typeof(returnCode) == "number", `Expected to get number, got; {typeof(returnCode)}!`)
+
 					if returnCode == 0 then
 						return data
 					end
