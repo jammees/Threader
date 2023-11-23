@@ -174,6 +174,7 @@ function Threader.DoWork(self: Threader, workData: { [any]: any })
 
 					return reject(`Thread #{index} has been cancelled for the following reason:\n{data}`)
 				end)
+				:timeout(30, `Thread #{index} had failed to respond back with any data in 30 seconds!`)
 
 			if isServer then
 				thread.ThreadHandlerServer.Disabled = false
