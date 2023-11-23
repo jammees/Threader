@@ -152,28 +152,20 @@ function Threader._FragmentWorkData(self: Threader, workData: { [any]: any })
 end
 
 function Threader.DoWork(self: Threader, workData: { [any]: any })
-	debug.profilebegin("Check args and state")
 	Assert(typeof(workData) == "table", `Expected table, got; {typeof(workData)}!`)
 
 	if self.State == Threader.States.Working then
 		error("Can not call :DoWork while it is still running!")
 	end
-	debug.profileend()
 
-	debug.profilebegin("Set state as working")
 	self.State = Threader.States.Working
-	debug.profileend()
 
-	debug.profilebegin("Fragment data")
 	local workFragment = self:_FragmentWorkData(workData)
-	debug.profileend()
 
 	return Promise.new(function(resolve, reject)
 		local threadPromises = {}
 
-		debug.profilebegin("Setup threadPromises")
 		for index, thread: Thread in self._Threads :: { Thread } do
-			debug.profilebegin("Promise.fromEvent")
 			threadPromises[#threadPromises + 1] = Promise.fromEvent(thread.ThreadDone.Event)
 				:andThen(function(returnCode: number, data)
 					if returnCode == 0 then
@@ -182,7 +174,6 @@ function Threader.DoWork(self: Threader, workData: { [any]: any })
 
 					return reject(`Thread #{index} has been cancelled for the following reason:\n{data}`)
 				end)
-			debug.profileend()
 
 			debug.profilebegin("Enable handler")
 			if isServer then
@@ -190,20 +181,14 @@ function Threader.DoWork(self: Threader, workData: { [any]: any })
 			else
 				thread.ThreadHandlerClient.Disabled = false
 			end
-			debug.profileend()
 
-			debug.profilebegin("dispatch work")
 			thread:SendMessage("DoWork", (workFragment :: {})[index])
-			debug.profileend()
 		end
-		debug.profileend()
 
 		Promise.all(threadPromises):andThen(function(...)
-			debug.profilebegin("resolve")
 			self.State = Threader.States.Standby
 
 			resolve(...)
-			debug.profileend()
 		end)
 	end)
 end
@@ -235,11 +220,11 @@ function Threader.SetThreads(self: Threader, amountThreads: number)
 	end
 
 	if delta > 0 then
-		debug.profilebegin("Create threads")
+		--debug.profilebegin("Create threads")
 		self:_GenerateWorkers(delta)
-		debug.profileend()
+		--debug.profileend()
 	elseif delta < 0 then
-		debug.profilebegin("Destroy threads")
+		--debug.profilebegin("Destroy threads")
 		for i = 0, math.abs(delta) - 1 do
 			local index = #self._Threads - i
 			local thread = self._Threads[index]
@@ -253,7 +238,7 @@ function Threader.SetThreads(self: Threader, amountThreads: number)
 			self._ThreadPool:Return(thread)
 			self._Threads[index] = nil
 		end
-		debug.profileend()
+		--debug.profileend()
 	end
 end
 
