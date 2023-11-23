@@ -1,4 +1,3 @@
---!strict
 local Promise = require(script.Parent.Promise)
 
 type ThreadWorkerProperties = {
