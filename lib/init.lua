@@ -137,37 +137,18 @@ function Threader._GenerateWorkers(self: Threader, amountThreads: number)
 end
 
 function Threader._FragmentWorkData(self: Threader, workData: { [any]: any })
-	local function GetDataSize(tbl)
-		local size = 0
+	local dataChunkSize = math.ceil(#workData / #self._Threads)
+	local fragmentedData = {}
 
-		for _ in tbl do
-			size += 1
-		end
+	for i = 1, #self._Threads do
+		local min = dataChunkSize * (i - 1) + 1
+		local max = dataChunkSize * i
 
-		return size
+		fragmentedData[i] = {}
+		table.move(workData, min, max, 1, fragmentedData[i])
 	end
 
-	-- Code from TaskDistributor
-	local dataChunk = {}
-	local iteration = 1
-	local chunkIteration = 1
-	local chunkSize = math.ceil(GetDataSize(workData) / #self._Threads)
-
-	dataChunk[chunkIteration] = {}
-
-	for _, objectData in workData do
-		if iteration > chunkSize then
-			chunkIteration += 1
-			iteration = 1
-			dataChunk[chunkIteration] = {}
-		end
-
-		dataChunk[chunkIteration][iteration] = objectData
-
-		iteration += 1
-	end
-
-	return dataChunk
+	return fragmentedData
 end
 
 function Threader.DoWork(self: Threader, workData: { [any]: any })
