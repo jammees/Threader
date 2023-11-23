@@ -47,10 +47,6 @@ end)
 		threadsContainer = Instance.new("Folder")
 		threadsContainer.Name = "_Threads"
 		threadsContainer.Parent = containerPath
-
-		if containerPath == script then
-			warn(`Could not identify client/server context!`)
-		end
 	end)
 
 local function GetCallerName()
