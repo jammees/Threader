@@ -61,6 +61,11 @@ local function CreateThreadContainer()
 	folder.Name = GetCallerName()
 	folder.Parent = threadsContainer
 
+	-- Funny thing is
+	-- it cannot be guaranteed where Threader is placed
+	-- so a copy of Promise has to be made for each container
+	-- this is such a bad idea basically you would have 3 promises
+	-- but my hands were forced if I wanted to have intellisesnse
 	script.Promise:Clone().Parent = threadsContainer
 
 	return folder
@@ -154,6 +159,9 @@ end
 function Threader.DoWork(self: Threader, workData: { [any]: any })
 	Assert(typeof(workData) == "table", `Expected table, got; {typeof(workData)}!`)
 
+	-- TODO: make Threader batch requests together
+	-- or actually don't I'm completely fine with not having it
+	-- honestly would just make the code so much more unreadable
 	if self.State == Threader.States.Working then
 		error("Can not call :DoWork while it is still running!")
 	end
@@ -165,6 +173,7 @@ function Threader.DoWork(self: Threader, workData: { [any]: any })
 	return Promise.new(function(resolve, reject)
 		local threadPromises = {}
 
+		--debug.profilebegin("Setup threadPromises")
 		for index, thread: Thread in self._Threads :: { Thread } do
 			threadPromises[#threadPromises + 1] = Promise.fromEvent(thread.ThreadDone.Event)
 				:andThen(function(returnCode: number, data)
@@ -186,6 +195,7 @@ function Threader.DoWork(self: Threader, workData: { [any]: any })
 
 			thread:SendMessage("DoWork", (fragmentedData :: {})[index])
 		end
+		--debug.profileend()
 
 		Promise.all(threadPromises):andThen(function(...)
 			self.State = Threader.States.Standby
