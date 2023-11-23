@@ -156,9 +156,7 @@ function Threader.DoWork(self: Threader, workData: { [any]: any })
 	Assert(typeof(workData) == "table", `Expected table, got; {typeof(workData)}!`)
 
 	if self.State == Threader.States.Working then
-		error(
-			"Can not call :DoWork while it is still running! This is to prevent sudden freezing and exponentially longer execution times!"
-		)
+		error("Can not call :DoWork while it is still running!")
 	end
 	debug.profileend()
 
