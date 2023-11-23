@@ -6,9 +6,7 @@ local threadDone: BindableEvent = script.Parent.ThreadDone
 local threadActor = script:GetActor()
 
 threadActor:BindToMessage("DoWork", function(data: any)
-	debug.profilebegin("Get ThreadWorker")
 	ThreadWorker = require(script.Parent.ThreadWorker :: any)
-	debug.profileend()
 
 	ThreadPromise = Promise.try(function()
 		local returnedData = ThreadWorker["OnWork"](ThreadWorker, data)
@@ -16,14 +14,10 @@ threadActor:BindToMessage("DoWork", function(data: any)
 		return returnedData
 	end)
 		:andThen(function(processedData)
-			debug.profilebegin("Call ThreadDone with return code 0")
 			threadDone:Fire(0, processedData)
-			debug.profileend()
 		end)
 		:catch(function(errorMessage: string)
-			debug.profilebegin("Call ThreadDone with return code 1")
 			threadDone:Fire(-1, tostring(errorMessage))
-			debug.profileend()
 		end)
 end)
 
