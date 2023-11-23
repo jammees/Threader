@@ -160,7 +160,7 @@ function Threader.DoWork(self: Threader, workData: { [any]: any })
 
 	self.State = Threader.States.Working
 
-	local workFragment = self:_FragmentWorkData(workData)
+	local fragmentedData = self:_FragmentWorkData(workData)
 
 	return Promise.new(function(resolve, reject)
 		local threadPromises = {}
@@ -184,7 +184,7 @@ function Threader.DoWork(self: Threader, workData: { [any]: any })
 				thread.ThreadHandlerClient.Disabled = false
 			end
 
-			thread:SendMessage("DoWork", (workFragment :: {})[index])
+			thread:SendMessage("DoWork", (fragmentedData :: {})[index])
 		end
 
 		Promise.all(threadPromises):andThen(function(...)
