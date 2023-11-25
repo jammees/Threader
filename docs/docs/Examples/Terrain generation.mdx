@@ -203,8 +203,8 @@ we create a part to represent water.
     ```
 </details>
 
-This is the main part of our terrain generation. The worker generates a perlin noise with the given **x**, **z** and **seed** values and
-uses it to position the voxel approprietly. After the perlin noise a.k.a. the **y** value the coordinate has been calculated, the distance
-from the water height gets determined that results in the voxel either becoming: **grass**, **sand**, **dirt**. After the voxel was
-generated and positioned accordingly a tree will be generated at the voxel if the distance from the water falls between the range of
-**0.15** and **0.5**. After the tree was moved to its position but collides with another tree it gets destroyed.
+This is the main part of our terrain generation. The worker generates a perlin noise with the given **x**, **z**, **seed**, **frequency** and
+**magnitude** values and uses it to position the voxel approprietly. After the perlin noise a.k.a. the **y** value of the coordinate 
+has been calculated, the distance from the water height gets determined that results in the voxel either becoming: **grass**, 
+**sand**, **dirt**. After the voxel was generated and positioned accordingly a tree will be generated at the voxel if the distance 
+from the water falls between the range of **0.15** and **0.5**. After the tree was moved to its position but collides with another tree it gets destroyed.
