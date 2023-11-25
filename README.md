@@ -7,6 +7,10 @@
 Version: <b>1.0.0</b>
 </div>
 
+Threader is __Easy to Use__, __Promise Based__ and uses __Send Data Get Data__ structure.
+Threader was made to make working with Actors easier and overall tie everything together.
+Once Threader had dispatched the work and all the threads had finished, it will return all of the 
+data that the threads had returned.
 
 ## Showcase
 
