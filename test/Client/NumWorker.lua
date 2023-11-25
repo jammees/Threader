@@ -79,4 +79,8 @@ function NumWorker:OnWork(data)
 	}
 end
 
+function NumWorker:OnCancel()
+	print("cancelled")
+end
+
 return NumWorker
