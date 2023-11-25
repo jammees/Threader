@@ -27,8 +27,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Deploy website
-        run: npm run deploy
-        with:
-          USE_SSH: false
-          GIT_USER: jammees
-          GIT_PASS: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set USE_SSH=false
+          set GIT_USER=jammees
+          set GIT_PASS=${{ secrets.GITHUB_TOKEN }}
+          npm run deploy
