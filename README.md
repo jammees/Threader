@@ -21,6 +21,8 @@ local Threader = require(game:GetService("ReplicatedStorage").Threader)
 local myThreader = Threader.new(5, PATH.TO.WORKER.MODULE)
 ```
 
+<br>
+
 ### Creating a ThreadWorker
 
 A ThreadWorker is a ModuleScript that is used to process the data in all of the threads 
@@ -39,6 +41,8 @@ end
 
 return myThreadWorker
 ```
+
+<br>
 
 ### Get the Data Back
 
