@@ -1,6 +1,6 @@
 local GetAvarageWorker = require(game:GetService("ReplicatedStorage").Threader).ThreadWorker.new()
 
-function GetAvarageWorker:OnWork(data)
+function GetAvarageWorker:OnDispatch(data)
 	local sum = 0
 	local iter = 0
 

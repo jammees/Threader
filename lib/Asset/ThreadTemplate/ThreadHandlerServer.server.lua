@@ -9,7 +9,7 @@ threadActor:BindToMessage("Dispatch", function(data: any)
 	ThreadWorker = require(script.Parent.ThreadWorker :: any)
 
 	ThreadPromise = Promise.try(function()
-		return ThreadWorker["OnWork"](ThreadWorker, data)
+		return ThreadWorker["OnDispatch"](ThreadWorker, data)
 	end)
 		:andThen(function(processedData)
 			threadDone:Fire(0, processedData)

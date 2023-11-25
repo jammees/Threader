@@ -3,7 +3,7 @@ local ThreadWorker = Threader.ThreadWorker
 
 local NumWorker = ThreadWorker.new()
 
-function NumWorker:OnWork(data)
+function NumWorker:OnDispatch(data)
 	task.desynchronize()
 
 	debug.profilebegin("Number operations")
