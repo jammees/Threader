@@ -273,8 +273,8 @@ end
 function Threader.Destroy(self: Threader)
 	self:AwaitState(Threader.States.Standby):andThen(function()
 		for _, thread in self._ThreadPool.Objects do
-			self._ThreadPool:Retire(thread)
-			thread:Destroy()
+			self._ThreadPool:Retire(thread.Object)
+			thread.Object:Destroy()
 		end
 
 		self._WorkerModule = nil :: any -- the good old any keyword to silence the "it is not a ModuleScript you can't do this". Well guess what! Yes I can!!!
