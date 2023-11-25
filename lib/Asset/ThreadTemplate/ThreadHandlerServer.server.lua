@@ -19,7 +19,7 @@ threadActor:BindToMessage("Dispatch", function(data: any)
 		end)
 end)
 
-threadActor:BindToMessage("Cancel", function()
+threadActor:BindToMessage("CancelDispatch", function()
 	if ThreadPromise:getStatus() == Promise.Status.Resolved then
 		return
 	end

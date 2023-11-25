@@ -212,7 +212,7 @@ function Threader.Cancel(self: Threader)
 	end
 
 	for _, thread: Thread in self._Threads :: { Thread } do
-		thread:SendMessage("Cancel")
+		thread:SendMessage("CancelDispatch")
 	end
 
 	self.State = Threader.States.Standby
