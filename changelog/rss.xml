@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+    <channel>
+        <title>Threader Blog</title>
+        <link>https://your-docusaurus-site.example.com/changelog</link>
+        <description>Threader Blog</description>
+        <lastBuildDate>Sun, 19 Nov 2023 00:00:00 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <language>en</language>
+        <item>
+            <title><![CDATA[v1.0.0]]></title>
+            <link>https://your-docusaurus-site.example.com/changelog/update-1-0-0</link>
+            <guid>https://your-docusaurus-site.example.com/changelog/update-1-0-0</guid>
+            <pubDate>Sun, 19 Nov 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[Initial release of Threader.]]></description>
+            <content:encoded><![CDATA[<p>Initial release of Threader.</p>]]></content:encoded>
+        </item>
+    </channel>
+</rss>
