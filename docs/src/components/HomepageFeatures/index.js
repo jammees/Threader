@@ -28,8 +28,8 @@ const FeatureList = [
     Svg: require('@site/static/img/Send Data Get Data.svg').default,
     description: (
       <>
-        Once Threader had been dispatched the work and all the threads had
-        finished will return all of the data that the threads had processed.
+        Once Threader had dispatched the work and all the threads had finished, it will return all of the 
+        data that the threads had returned.
       </>
     ),
   },
