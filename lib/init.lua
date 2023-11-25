@@ -168,9 +168,8 @@ function Threader.DoWork(self: Threader, workData: { [any]: any })
 
 	self.State = Threader.States.Working
 
-	local fragmentedData = self:_FragmentWorkData(workData)
-
 	return Promise.new(function(resolve, reject)
+		local fragmentedData = self:_FragmentWorkData(workData)
 		local threadPromises = {}
 
 		--debug.profilebegin("Setup threadPromises")
