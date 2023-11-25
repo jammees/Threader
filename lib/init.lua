@@ -156,14 +156,14 @@ function Threader._FragmentWorkData(self: Threader, workData: { [any]: any })
 	return fragmentedData
 end
 
-function Threader.DoWork(self: Threader, workData: { [any]: any })
+function Threader.Dispatch(self: Threader, workData: { [any]: any })
 	Assert(typeof(workData) == "table", `Expected table, got; {typeof(workData)}!`)
 
 	-- TODO: make Threader batch requests together
 	-- or actually don't I'm completely fine with not having it
 	-- honestly would just make the code so much more unreadable
 	if self.State == Threader.States.Working then
-		error("Can not call :DoWork while it is still running!")
+		error("Can not call :Dispatch while it is still running!")
 	end
 
 	self.State = Threader.States.Working

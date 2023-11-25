@@ -8,7 +8,7 @@ for i = 1, 10000 do
 end
 
 local t1 = os.clock()
-NumThreader:DoWork(workTable)
+NumThreader:Dispatch(workTable)
 	:andThen(function(results)
 		print(`[Client] Finished work in {os.clock() - t1}`, results)
 	end)

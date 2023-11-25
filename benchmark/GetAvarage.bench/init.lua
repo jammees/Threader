@@ -37,7 +37,7 @@ return {
 			Profiler.End()
 
 			Profiler.Begin("Work")
-			AvarageThreader:DoWork(RandomNumbers)
+			AvarageThreader:Dispatch(RandomNumbers)
 			Profiler.End()
 		end,
 
@@ -48,7 +48,7 @@ return {
 			Profiler.End()
 
 			Profiler.Begin("Work")
-			AvarageThreader:DoWork(RandomNumbers)
+			AvarageThreader:Dispatch(RandomNumbers)
 			Profiler.End()
 		end,
 
@@ -59,7 +59,7 @@ return {
 			Profiler.End()
 
 			Profiler.Begin("Work")
-			AvarageThreader:DoWork(RandomNumbers)
+			AvarageThreader:Dispatch(RandomNumbers)
 			Profiler.End()
 		end,
 
@@ -70,7 +70,7 @@ return {
 			Profiler.End()
 
 			Profiler.Begin("Work")
-			AvarageThreader:DoWork(RandomNumbers)
+			AvarageThreader:Dispatch(RandomNumbers)
 			Profiler.End()
 		end,
 	},
