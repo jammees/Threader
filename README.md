@@ -2,9 +2,9 @@
     <img height=150 src="./docs/static/img/SVG Threader logo dark.svg#gh-light-mode-only">
     <img height=150 src="./docs/static/img/SVG Threader logo light.svg#gh-dark-mode-only">
     
-    <h3>Promise based Actor wrapper.</h3>
+<h3>Promise based Actor wrapper.</h3>
 
-    Version: <b>1.0.0</b>
+Version: <b>1.0.0</b>
 </div>
 
 
