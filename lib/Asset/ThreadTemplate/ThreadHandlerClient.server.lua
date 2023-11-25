@@ -5,7 +5,7 @@ local ThreadPromise = nil
 local threadDone: BindableEvent = script.Parent.ThreadDone
 local threadActor = script:GetActor()
 
-threadActor:BindToMessage("DoWork", function(data: any)
+threadActor:BindToMessage("Dispatch", function(data: any)
 	ThreadWorker = require(script.Parent.ThreadWorker :: any)
 
 	ThreadPromise = Promise.try(function()

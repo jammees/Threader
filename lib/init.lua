@@ -195,7 +195,7 @@ function Threader.DoWork(self: Threader, workData: { [any]: any })
 				thread.ThreadHandlerClient.Disabled = false
 			end
 
-			thread:SendMessage("DoWork", (fragmentedData :: {})[index])
+			thread:SendMessage("Dispatch", (fragmentedData :: {})[index])
 		end
 		--debug.profileend()
 
