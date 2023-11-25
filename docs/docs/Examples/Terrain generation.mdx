@@ -1,0 +1,210 @@
+---
+sidebar_position: 3
+---
+
+This example will showcase how terrain generation with trees can be made using multi-threading.
+
+## Runner script
+
+<details>
+    <summary>Source</summary>
+
+    ```lua
+    type TerrainData = {
+        x: number,
+        z: number,
+        seed: number,
+        resolution: number,
+        frequency: number,
+        magnitude: number,
+        waterHeight: number,
+        extraHeigt: number,
+    }
+
+    local TerrainDataType = require(script.TerrainDataType)
+    local Threader = require(game:GetService("ReplicatedStorage").Threader)
+
+    local TerrainGenerationThreader = Threader.new(10, script.TerrainGeneratorWorker)
+
+    -- define values that will be used to generate the terrain
+    -- NOTE: terrainSize determines how big of an area will the terrain occupy
+    local terrainSize = 200 -- terrainSize^2
+    local seed = 2
+    local resolution = 100
+    local frequency = 5
+    local magnitude = 15
+    local waterHeight = Random.new(seed):NextNumber()
+    local extraHeigt = 15
+
+    -- generate `workData`
+    local terrainPositions = {} :: { TerrainData }
+
+    for x = 1, terrainSize do
+        for z = 1, terrainSize do
+            table.insert(terrainPositions, {
+                x = x,
+                z = z,
+                seed = seed,
+                resolution = resolution,
+                frequency = frequency,
+                magnitude = magnitude,
+                waterHeight = waterHeight,
+                extraHeigt = extraHeigt,
+            })
+        end
+    end
+
+    task.wait(3) -- added to have a bit of an intermission until the whole pc freezes :)
+
+    TerrainGenerationThreader:Dispatch(terrainPositions):andThen(function()
+        local waterBlock = Instance.new("Part")
+        waterBlock.Name = "Water"
+        waterBlock.Size = Vector3.new(terrainSize, 1, terrainSize)
+        waterBlock.Position =
+            Vector3.new(terrainSize / 2 + 0.5, extraHeigt + waterHeight * magnitude, terrainSize / 2 + 0.5)
+        waterBlock.Color = Color3.fromRGB(41, 109, 255)
+        waterBlock.Transparency = 0.6
+        waterBlock.Anchored = true
+        waterBlock.Parent = workspace
+    end)
+    ```
+</details>
+
+The runner script is responsible to dispatch all the work to the threads and prepare the most crucial data
+for each thread.
+
+Before calling `Threader:Dispatch()` on our *TerrainGenerationThreader* class, we have to first make a `workData`
+table that contains every voxel's data: **x**, **z**, **seed**, **resolution**, **frequency**, **magnitude**, **waterHeight**, **extraHeigt**.
+Each of them is used for a different purpose: **x** and **z** is used for coordinates and in generating the perlin noise using the seed. The **resolution**
+determines how smooth will the perlin noise be. The **frequency** makes the perlin noise have bigger fluctuation and the **magnitude** increases the height.
+
+When *TerrainGenerationThreader* had dispatched and all the threads had reported back with no errors then `:andThen` method gets ran, in which
+we create a part to represent water.
+
+## TerrainGeneratorWorker
+
+<details>
+    <summary>Source</summary>
+
+    ```lua
+    type TerrainData = {
+        x: number,
+        z: number,
+        seed: number,
+        resolution: number,
+        frequency: number,
+        magnitude: number,
+        waterHeight: number,
+        extraHeigt: number,
+    }
+
+    local ServerScriptService = game:GetService("ServerScriptService")
+
+    local TerrainDataType = require(ServerScriptService.ThreaderServer.TerrainDataType)
+    local Threader = require(game:GetService("ReplicatedStorage").Threader)
+
+    local TerrainGeneratorWorker = Threader.ThreadWorker.new()
+
+    function TerrainGeneratorWorker:OnDispatch(terrainSet: { TerrainData })
+        -- create an RNG generator with the seed
+        local randomNumberGenerator = Random.new(terrainSet[1].seed)
+
+        for _, terrainData in terrainSet do
+            task.desynchronize()
+
+            -- generate perlin noise
+            local noiseY = math.noise(
+                terrainData.x / terrainData.resolution * terrainData.frequency,
+                terrainData.z / terrainData.resolution * terrainData.frequency,
+                13 / (terrainData.seed - 0.01)
+            ) + 0.5
+
+            local partSize = Vector3.one + Vector3.yAxis * 2
+            local partPosition =
+                Vector3.new(terrainData.x, noiseY * terrainData.magnitude - 1 + terrainData.extraHeigt, terrainData.z)
+            local partColor = nil
+
+            local distanceFromWaterLevel = noiseY - terrainData.waterHeight
+
+            -- above water
+            if distanceFromWaterLevel > 0.1 then
+                partColor = Color3.fromRGB(13, 134, 17)
+            -- below water
+            elseif distanceFromWaterLevel < 0 then
+                partColor = Color3.fromRGB(176, 86, 26)
+            -- at edge
+            else
+                partColor = Color3.fromRGB(208, 204, 91)
+            end
+
+            task.synchronize()
+
+            local part = Instance.new("Part")
+            part.Size = partSize
+            part.Position = partPosition
+            part.Anchored = true
+            part.Color = partColor
+            part.Parent = workspace.Terrain
+
+            -- Tree generation
+            if not (distanceFromWaterLevel > 0.15 and distanceFromWaterLevel < 0.5) then
+                continue
+            end
+
+            task.desynchronize()
+
+            local offsetX = randomNumberGenerator:NextNumber(-0.3, 0.3)
+            local offsetY = randomNumberGenerator:NextNumber(-0.4, 0.3)
+            local offsetZ = randomNumberGenerator:NextNumber(-0.3, 0.3)
+
+            local trunkSize = 1.5
+
+            local foliagePosition = Vector3.yAxis * trunkSize - Vector3.yAxis * 0.345
+            local treePosition =
+                CFrame.new(terrainData.x + offsetX, part.Position.Y + part.Size.Y - 1 + offsetY, terrainData.z + offsetZ)
+
+            task.synchronize()
+
+            local tree = Instance.new("Model")
+            tree.Name = "Tree"
+            tree.Parent = workspace.Terrain
+
+            local trunk = Instance.new("Part")
+            trunk.Color = Color3.fromRGB(176, 86, 26)
+            trunk.Size = Vector3.new(0.273, trunkSize, 0.273)
+            trunk.Anchored = true
+            trunk.Name = "Trunk"
+            trunk.Parent = tree
+
+            local foliage = Instance.new("Part")
+            foliage.Shape = Enum.PartType.Ball
+            foliage.Color = Color3.fromRGB(75, 151, 75)
+            foliage.Name = "Foliage"
+            foliage.Anchored = true
+            foliage.Position = foliagePosition
+            foliage.TopSurface = Enum.SurfaceType.Smooth
+            foliage.Parent = tree
+
+            tree.PrimaryPart = trunk
+
+            tree:SetPrimaryPartCFrame(treePosition)
+
+            for _, collideTree in foliage:GetTouchingParts() do
+                if not (collideTree.Name == "Foliage") then
+                    continue
+                end
+
+                tree:Destroy()
+            end
+        end
+    end
+
+    return TerrainGeneratorWorker
+    ```
+</details>
+
+This is the main part of our terrain generation. The worker generates a perlin noise with the given **x**, **z** and **seed** values and
+uses it to position the voxel approprietly. After the perlin noise a.k.a. the **y** value the coordinate has been calculated, the distance
+from the water height gets determined that results in the voxel either becoming: **grass**, **sand**, **dirt**. After the voxel was
+generated and positioned accordingly a tree will be generated at the voxel if the distance from the water falls between the range of
+**0.15** and **0.5**. After the tree was moved to its position but collides with another tree it gets destroyed.
