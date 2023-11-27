@@ -13,7 +13,7 @@ const config = {
   favicon: 'img/SVG Threader logo short light.svg',
 
   // Set the production url of your site here
-  url: 'https://jammees.github.io/Threader/',
+  url: 'https://jammees.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/Threader',
