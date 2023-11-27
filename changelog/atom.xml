@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://your-docusaurus-site.example.com/Threader/changelog</id>
+    <id>https://jammees.github.io/Threader/changelog</id>
     <title>Threader Blog</title>
     <updated>2023-11-19T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://your-docusaurus-site.example.com/Threader/changelog"/>
+    <link rel="alternate" href="https://jammees.github.io/Threader/changelog"/>
     <subtitle>Threader Blog</subtitle>
-    <icon>https://your-docusaurus-site.example.com/Threader/img/SVG Threader logo short light.svg</icon>
+    <icon>https://jammees.github.io/Threader/img/SVG Threader logo short light.svg</icon>
     <entry>
         <title type="html"><![CDATA[v1.0.0]]></title>
-        <id>https://your-docusaurus-site.example.com/Threader/changelog/update-1-0-0</id>
-        <link href="https://your-docusaurus-site.example.com/Threader/changelog/update-1-0-0"/>
+        <id>https://jammees.github.io/Threader/changelog/update-1-0-0</id>
+        <link href="https://jammees.github.io/Threader/changelog/update-1-0-0"/>
         <updated>2023-11-19T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Initial release of Threader.]]></summary>
         <content type="html"><![CDATA[<p>Initial release of Threader.</p>]]></content>
