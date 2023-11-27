@@ -99,9 +99,6 @@ we create a part to represent water.
         extraHeigt: number,
     }
 
-    local ServerScriptService = game:GetService("ServerScriptService")
-
-    local TerrainDataType = require(ServerScriptService.ThreaderServer.TerrainDataType)
     local Threader = require(game:GetService("ReplicatedStorage").Threader)
 
     local TerrainGeneratorWorker = Threader.ThreadWorker.new()
