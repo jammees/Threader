@@ -131,6 +131,18 @@ const config = {
         darkTheme: prismThemes.oceanicNext,
         additionalLanguages: ['lua'],
       },
+      algolia: {
+        // The application ID provided by Algolia
+        appId: 'IZ8H5IJ07H',
+  
+        // Public API key: it is safe to commit it
+        apiKey: '60190b7ce631f58d0c2dd2698f48b04b',
+  
+        indexName: 'threader',
+  
+        // Optional: see doc section below
+        contextualSearch: false,
+      },
     }),
 };
 
