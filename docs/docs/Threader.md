@@ -5,8 +5,9 @@ sidebar_position: 2
 Threader is a library made to extend the functionality of `Actors` to make working with them
 easier.
 
-When Threader had been required for the first time it will create a container
-for all of the threads in either `ServerStorage` or in the player's `PlayerScripts` called *_Threads*.
+When Threader had been required for the first time, it will create a container folder called *_Threads* that 
+is placed in either `ServerStorage` if *server* environment, `PlayerScripts` if *client environment* or 
+`itself` if neither.
 
 ## State
 
