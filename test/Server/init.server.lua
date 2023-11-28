@@ -1,5 +1,4 @@
-local TerrainDataType = require(script.TerrainDataType)
-local Threader = require(game:GetService("ReplicatedStorage").Threader)
+local Threader = require(game:GetService("ReplicatedStorage").Threader :: any)
 
 local TerrainGenerationThreader = Threader.new(10, script.TerrainGeneratorWorker)
 
@@ -11,7 +10,7 @@ local magnitude = 15
 local waterHeight = Random.new(seed):NextNumber()
 local extraHeigt = 15
 
-local terrainPositions = {} :: { TerrainDataType.TerrainData }
+local terrainPositions = {}
 
 for x = 1, terrainSize do
 	for z = 1, terrainSize do

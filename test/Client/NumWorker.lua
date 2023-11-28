@@ -1,4 +1,4 @@
-local Threader = require(game:GetService("ReplicatedStorage").Threader)
+local Threader = require(game:GetService("ReplicatedStorage").Threader :: any)
 local ThreadWorker = Threader.ThreadWorker
 
 local NumWorker = ThreadWorker.new()

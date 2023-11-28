@@ -1,11 +1,8 @@
-local ServerScriptService = game:GetService("ServerScriptService")
-
-local TerrainDataType = require(ServerScriptService.ThreaderServer.TerrainDataType)
-local Threader = require(game:GetService("ReplicatedStorage").Threader)
+local Threader = require(game:GetService("ReplicatedStorage").Threader :: any)
 
 local TerrainGeneratorWorker = Threader.ThreadWorker.new()
 
-function TerrainGeneratorWorker:OnDispatch(terrainSet: { TerrainDataType.TerrainData })
+function TerrainGeneratorWorker:OnDispatch(terrainSet)
 	local randomNumberGenerator = Random.new(terrainSet[1].seed)
 
 	for _, terrainData in terrainSet do
