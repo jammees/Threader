@@ -1,33 +1,34 @@
 {
-  "name": "Threader Dev",
-  "globIgnorePaths": ["**/*.spec.lua"],
-  "tree": {
-    "$className": "DataModel",
+    "name": "Threader Dev",
+    "tree": {
+      "$className": "DataModel",
+  
+      "ReplicatedStorage": {
+        "Threader": {
+          "$path": "lib"
+        },
 
-    "ReplicatedStorage": {
-      "Threader": {
-        "$path": "lib",
-
-        "Promise": { "$path": "vendors/Promise" }
-      },
-
-      "Benchmarks": {
-        "$path": "benchmark"
-      }
-    },
-    
-    "StarterPlayer": {
-      "StarterPlayerScripts": {
-        "ThreaderClient": {
-          "$path": "test/Client"
+        "Promise": {
+          "$path": "vendors/Promise"
+        },
+        
+        "Benchmarks": {
+          "$path": "benchmark"
         }
-      }
-    },
-    
-    "ServerScriptService": {
-      "ThreaderServer": {
-        "$path": "test/Server"
+      },
+      
+      "StarterPlayer": {
+        "StarterPlayerScripts": {
+          "ThreaderClient": {
+            "$path": "test/Client"
+          }
+        }
+      },
+      
+      "ServerScriptService": {
+        "ThreaderServer": {
+          "$path": "test/Server"
+        }
       }
     }
   }
-}
