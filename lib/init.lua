@@ -66,7 +66,7 @@ local function CreateThreadContainer()
 	-- so a copy of Promise has to be made for each container
 	-- this is such a bad idea basically you would have 3 promises
 	-- but my hands were forced if I wanted to have intellisesnse
-	script.Promise:Clone().Parent = threadsContainer
+	--PromiseModule:Clone().Parent = threadsContainer
 
 	return folder
 end
