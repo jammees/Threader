@@ -29,7 +29,7 @@ local RunService = game:GetService("RunService")
 local ServerStorage = game:GetService("ServerStorage")
 local Players = game:GetService("Players")
 
-local Promise = require(script.Promise)
+local Promise = require(script.Parent.Promise) :: any
 local ThreadWorkerClass = require(script.ThreadWorkerClass)
 local PoolClass = require(script.ObjectPool).Class
 
