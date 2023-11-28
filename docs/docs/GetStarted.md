@@ -27,8 +27,18 @@ to process the data than just a single thread.
     1. Head over to Threader's repository  
     2. Click on the `<> Code` dropdown
     3. Click on **Download ZIP**
-    4. Extract the **lib** and the **vendors/Promise** folder
-    5. Put the **vendors/Promise** folder into the **lib** folder
+    4. Extract the **lib** folder
+    5. Import [evaera's Promise](https://github.com/evaera/roblox-lua-promise) library:
+
+    ```
+    git clone https://github.com/evaera/roblox-lua-promise lib/Promise
+    ```
+
+    The *lib/Promise* part depends on where the lib folder is. If it was renamed replace the *lib* part with the new name and if it
+    is not in the root it is necessary to add the path to the *lib* folder!
+
+    **Alternatively** the repository can be downloaded and Promise's **lib** library extracted into Threader's folder.
+    
   </TabItem>
   <TabItem value="git" label="Git" default>
     Installing Threader with git is one of the more convenient
