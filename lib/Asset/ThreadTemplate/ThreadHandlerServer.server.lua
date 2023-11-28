@@ -1,4 +1,4 @@
-local Promise = require(script.Parent.Parent.Parent.Promise)
+local Promise = nil
 local ThreadWorker = nil
 local ThreadPromise = nil
 
@@ -7,6 +7,12 @@ local threadActor = script:GetActor()
 
 threadActor:BindToMessage("Dispatch", function(data: any)
 	ThreadWorker = require(script.Parent.ThreadWorker :: any)
+
+	-- Here is some big brain stuff happening
+	-- since ThreadWorker is guaranteed to have a Promise
+	-- reference we can use that instead of trying to find A promise
+	-- library that is not even 100% will be the right version.
+	Promise = ThreadWorker.Promise
 
 	ThreadPromise = Promise.try(function()
 		return ThreadWorker["OnDispatch"](ThreadWorker, data)
