@@ -14,6 +14,11 @@ whether the advantages of using multi-threading outweight the
 disadvantages. By disadvantages, multiple threads taking longer
 to process the data than just a single thread.
 
+:::warning
+  Threader requires version 4.0.0 of Promise! Later versions of module was
+  not tested and are not guaranteed to work!
+:::
+
 <Tabs>
   <TabItem value="source" label="Downloading Source" default>
     Downloading the source is the messiest way to
