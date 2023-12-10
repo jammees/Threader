@@ -2,8 +2,6 @@ local Promise = require(script.Parent.Parent.Promise) :: any
 
 type ThreadWorkerProperties = {
 	Promise: typeof(Promise),
-	OnCancel: (self: ThreadWorker) -> ()?,
-	OnDispatch: (self: ThreadWorker, data: any) -> ()?,
 }
 
 local ThreadWorkerClass = {}
