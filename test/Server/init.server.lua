@@ -29,6 +29,8 @@ end
 
 task.wait()
 
+local startTime = tick()
+
 TerrainGenerationThreader:Dispatch(terrainPositions):andThen(function()
 	local waterBlock = Instance.new("Part")
 	waterBlock.Name = "Water"
@@ -39,4 +41,6 @@ TerrainGenerationThreader:Dispatch(terrainPositions):andThen(function()
 	waterBlock.Transparency = 0.6
 	waterBlock.Anchored = true
 	waterBlock.Parent = workspace
+
+	print("Took", tick() - startTime, "seconds to generate terrain.")
 end)
