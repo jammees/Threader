@@ -27,7 +27,7 @@ for x = 1, terrainSize do
 	end
 end
 
-task.wait(3)
+task.wait()
 
 TerrainGenerationThreader:Dispatch(terrainPositions):andThen(function()
 	local waterBlock = Instance.new("Part")
