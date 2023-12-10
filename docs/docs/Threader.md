@@ -11,10 +11,6 @@ is placed in either `ServerStorage` if *server* environment, `PlayerScripts` if 
 
 ## State
 
-State is used in Threader to convey what is the library doing currently.
-It can be either *Standby* or *Working* state. All of the states can
-be accessed with **Threader.States**:
-
 ```lua
 Threader.States = {
     Standby = "Standby",
@@ -22,17 +18,30 @@ Threader.States = {
 }
 ```
 
+State is used in Threader to convey what is the library doing currently.
+It can be either *Standby* or *Working* state. All of the states can
+be accessed with **Threader.States**:
+
 Using **Threader.States** is not necessary and everything can be used
-without it.
+without it. By providing the value itself as a string.
 
 ## Promise
 
-Threader has a reference to Promise and can be accessed with **Threader.Promise** for quality-of-life.
+```lua
+Threader.Promise = Promise
+```
+
+Reference to Promise for quality-of-life.
 
 ## ThreadWorker
 
-Reference to [ThreadWorker](./ThreadWorker) class. ThreadWorker is a simple class that is used within a *workerModule* when
-passing it into `.new`.
+```lua
+Threader.ThreadWorker = ThreadWorkerClass
+```
+    
+ThreadWorkers provide a 2-way communication between the thread and the
+main thread while also processing the data on request. If required
+ThreadWorkers can also be cancelled at any time.
 
 ## API
 
@@ -45,6 +54,17 @@ Threader.new(amountThreads: number, workerModule: ModuleScript)
 Constructs a new Threader class and creates a container folder for the
 threads under the *_Threads* folder with the name of the caller. Sets up
 *amountThreads* amount of threads.
+
+In the documentation a class made with `Threader.new` will be referred to
+as *ThreaderClass*.
+
+```lua
+local Threader = require(PATH.TO.THREADER)
+
+-- Creates a new ThreaderClass
+-- highlight-next-line
+local SumThreader = Threader.new(5, PATH.TO.WORKER_MODULE)
+```
 
 ### \:_GenerateWorkers
 
@@ -93,13 +113,30 @@ an error. **Only pass *workData* tables that only contain primitive or serializa
 :::
 
 Starts the processing of the data specified in *workData*. The *workData*
-must always be a table and generally structured to be easily groupped together. Reason is, Threader always fragments it to be distributed across all of the threads currently set either by `.new` or `:SetThreads`. Returns
-a Promise that will resolve once all of the threads have completed their jobs
-or one encountered an error.
+must always be a table and generally structured to be easily groupped together. Reason is, 
+Threader always fragments it to be distributed across all of the threads currently set either by `
+.new` or `:SetThreads`. Returns a Promise that will resolve once all of the threads have completed 
+their jobs or one encountered an error.
 
 When calling `:Cancel` while the Threader class is running will result in
 the Promise rejecting, not returning the data that was done before the
 call.
+
+```lua
+local Threader = require(PATH.TO.THREADER)
+local SumThreader = Threader.new(5, PATH.TO.WORKER_MODULE)
+
+-- Dispatches the data and prints it once it is done. Or warns
+-- if an error occured.
+-- highlight-next-line
+SumThreader:Dispatch({ 1, 2, 3, 4, 5 })
+    :andThen(function(data)
+        print(data)
+    end)
+    :catch(function(errorMessage)
+        warn(errorMessage)
+    end)
+```
 
 ### \:Cancel
 
@@ -114,6 +151,27 @@ current thread until the state will equal to **Threader.States.Standby**!
 
 Cancels the current Threader class if the state is **Threader.States.Working**. Else it will return with
 no errors. Sets the current state to **Threader.States.Standby** if successful.
+
+Cancelling a ThreaderClass that completes faster than the time it takes to cancel will still
+result in the ThreaderClass's Promise resolve with the processed data.
+
+```lua
+local Threader = require(PATH.TO.THREADER)
+local SumThreader = Threader.new(5, PATH.TO.WORKER_MODULE)
+
+SumThreader:Dispatch({ 1, 2, 3, 4, 5 })
+    :andThen(function(data)
+        print(data)
+    end)
+    :catch(function(errorMessage)
+        warn(errorMessage)
+    end)
+
+-- Even if we called `:Cancel` here, SumThreader's Promise would
+-- still resolve with the processed data.
+-- highlight-next-line
+SumThreader:Cancel()
+```
 
 ### \:SetThreads
 
@@ -136,6 +194,15 @@ up!
 
 Uses [Threader:_GenerateWorkers()](./Threader#_generateworkers) internally when delta is bigger.
 
+```lua
+local Threader = require(PATH.TO.THREADER)
+local SumThreader = Threader.new(5, PATH.TO.WORKER_MODULE)
+
+-- Will set the threads to 10 instead of 5 we set initially.
+-- highlight-next-line
+SumThreader:SetThreads(10)
+```
+
 ### \:AwaitState
 
 ```lua
@@ -145,10 +212,40 @@ Threader:AwaitState(awaitState: string): Promise
 When called will return a `Promise` that will resolve once the
 state equals to `awaitState`.
 
+```lua
+local Threader = require(PATH.TO.THREADER)
+local SumThreader = Threader.new(5, PATH.TO.WORKER_MODULE)
+
+-- Will print "SumThreader is now in standby!" once the state
+-- equals to Threader.States.Standby.
+-- highlight-start
+SumThreader:AwaitState(Threader.States.Standby):andThen(function()
+    print("SumThreader is now in standby!")
+end)
+-- highlight-end
+
+SumThreader:Dispatch({ 1, 2, 3, 4, 5 })
+    :andThen(function(data)
+        print(data)
+    end)
+    :catch(function(errorMessage)
+        warn(errorMessage)
+    end)
+```
+
 ### \:Destroy
 
 ```lua
 Threader:Destroy()
 ```
 
-Destroys the Threader class.
+Destroys the Threader class. Once called will wait
+until ThreaderClass is Standby.
+
+```lua
+local Threader = require(PATH.TO.THREADER)
+local SumThreader = Threader.new(5, PATH.TO.WORKER_MODULE)
+
+-- Destroys SumThreader making it no longer usable.
+-- highlight-next-line
+SumThreader:Destroy()
