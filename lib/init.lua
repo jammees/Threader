@@ -84,13 +84,13 @@ type ThreaderProperties = {
 
 type Threader = typeof(setmetatable({} :: ThreaderProperties, Threader))
 
+Threader.States = table.freeze({
+	Standby = "Standby",
+	Working = "Working",
+})
 Threader.Promise = Promise
 Threader.ThreadWorker = ThreadWorkerClass
 
-Threader.States = {
-	Standby = "Standby",
-	Working = "Working",
-}
 
 function Threader.new(amountThreads: number, workerModule: ModuleScript)
 	Assert(typeof(amountThreads) == "number", `Expected number, got; {typeof(amountThreads)}!`)
