@@ -4,7 +4,7 @@
     
 <h3>Promise based Actor wrapper.</h3>
 
-Version: <b>1.0.0</b>
+Version: <b>1.0.1</b>
 </div>
 
 Threader is __Easy to Use__, __Promise Based__ and uses __Send Data Get Data__ structure.
