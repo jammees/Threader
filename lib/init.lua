@@ -1,18 +1,14 @@
 --[[
-    Threader
+	Threader
 
-    Another implementation of an Actor wrapper
-    to make it easier to work with them. Now you may ask
-	this amazing question: Why does this exist? I would
-	most likely reply: It is an excuse for me to not
-	work on Rethink.
+	Threader is a library made to extend the functionality of `Actors` to make working with them
+	easier.
 
-	On the talk of Rethink. Have you ever tried to make a 2D
-	game engine but backed down because ROBLOX does not come
-	with pre-made tools to aid developers in such styled games?
-	Well Rethink might be the tool for you: A versatile, easy-to-use
-	2D game engine! It's 3:37 AM as of writing this. Why am I not
-	going to bed and better yet why am I still writing thi-
+	When Threader had been required for the first time, it will create a container folder called *_Threads* that 
+	is placed in either `ServerStorage` if *server* environment, `PlayerScripts` if *client environment* or 
+	`itself` if neither.
+
+	Under the MIT license.
 ]]
 
 type Thread = Actor & {
