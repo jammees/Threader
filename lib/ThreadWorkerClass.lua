@@ -15,4 +15,7 @@ function ThreadWorkerClass.new(): ThreadWorker
 	}, ThreadWorkerClass)
 end
 
+function ThreadWorkerClass:OnDispatch(_data)
+	error("ThreadWorkerClass:OnDispatch() must be overridden!")
+end
 return ThreadWorkerClass
