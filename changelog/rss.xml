@@ -4,10 +4,36 @@
         <title>Threader Blog</title>
         <link>https://jammees.github.io/Threader/changelog</link>
         <description>Threader Blog</description>
-        <lastBuildDate>Sun, 19 Nov 2023 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 10 Dec 2023 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[v1.0.1]]></title>
+            <link>https://jammees.github.io/Threader/changelog/update-1-0-1</link>
+            <guid>https://jammees.github.io/Threader/changelog/update-1-0-1</guid>
+            <pubDate>Sun, 10 Dec 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[Added]]></description>
+            <content:encoded><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="added">Added<a href="https://jammees.github.io/Threader/changelog/update-1-0-1#added" class="hash-link" aria-label="Direct link to Added" title="Direct link to Added">​</a></h2>
+<ul>
+<li>Documentation in Threader module</li>
+<li><code>:OnDispatch()</code> now errors if it is not overriden</li>
+<li><code>:OnCancel()</code> now warns if it is not overriden and <code>:Threader:Cancel()</code> was called</li>
+<li>Added examples in documentation</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="fixed">Fixed<a href="https://jammees.github.io/Threader/changelog/update-1-0-1#fixed" class="hash-link" aria-label="Direct link to Fixed" title="Direct link to Fixed">​</a></h2>
+<ul>
+<li><strong>ThreadHandler</strong> not connecting to <em>Dispatch</em> in time</li>
+<li>Documentation homepage layout for mobiles</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="modification">Modification<a href="https://jammees.github.io/Threader/changelog/update-1-0-1#modification" class="hash-link" aria-label="Direct link to Modification" title="Direct link to Modification">​</a></h2>
+<ul>
+<li>Slight changes in documentation</li>
+<li>Rewrote header</li>
+<li><strong>Threader.States</strong> is set to read-only now</li>
+<li>Removed some comments</li>
+</ul>]]></content:encoded>
+        </item>
         <item>
             <title><![CDATA[v1.0.0]]></title>
             <link>https://jammees.github.io/Threader/changelog/update-1-0-0</link>

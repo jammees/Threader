@@ -2,11 +2,41 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jammees.github.io/Threader/changelog</id>
     <title>Threader Blog</title>
-    <updated>2023-11-19T00:00:00.000Z</updated>
+    <updated>2023-12-10T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jammees.github.io/Threader/changelog"/>
     <subtitle>Threader Blog</subtitle>
     <icon>https://jammees.github.io/Threader/img/SVG Threader logo short light.svg</icon>
+    <entry>
+        <title type="html"><![CDATA[v1.0.1]]></title>
+        <id>https://jammees.github.io/Threader/changelog/update-1-0-1</id>
+        <link href="https://jammees.github.io/Threader/changelog/update-1-0-1"/>
+        <updated>2023-12-10T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Added]]></summary>
+        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="added">Added<a href="https://jammees.github.io/Threader/changelog/update-1-0-1#added" class="hash-link" aria-label="Direct link to Added" title="Direct link to Added">​</a></h2>
+<ul>
+<li>Documentation in Threader module</li>
+<li><code>:OnDispatch()</code> now errors if it is not overriden</li>
+<li><code>:OnCancel()</code> now warns if it is not overriden and <code>:Threader:Cancel()</code> was called</li>
+<li>Added examples in documentation</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="fixed">Fixed<a href="https://jammees.github.io/Threader/changelog/update-1-0-1#fixed" class="hash-link" aria-label="Direct link to Fixed" title="Direct link to Fixed">​</a></h2>
+<ul>
+<li><strong>ThreadHandler</strong> not connecting to <em>Dispatch</em> in time</li>
+<li>Documentation homepage layout for mobiles</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="modification">Modification<a href="https://jammees.github.io/Threader/changelog/update-1-0-1#modification" class="hash-link" aria-label="Direct link to Modification" title="Direct link to Modification">​</a></h2>
+<ul>
+<li>Slight changes in documentation</li>
+<li>Rewrote header</li>
+<li><strong>Threader.States</strong> is set to read-only now</li>
+<li>Removed some comments</li>
+</ul>]]></content>
+        <author>
+            <name>jammees</name>
+            <uri>https://github.com/jammees</uri>
+        </author>
+    </entry>
     <entry>
         <title type="html"><![CDATA[v1.0.0]]></title>
         <id>https://jammees.github.io/Threader/changelog/update-1-0-0</id>
