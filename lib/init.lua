@@ -126,6 +126,12 @@ function Threader._GenerateWorkers(self: Threader, amountThreads: number)
 		worker.Parent = thread
 		thread.Parent = self._Container
 
+		if isServer then
+			thread.ThreadHandlerServer.Disabled = false
+		else
+			thread.ThreadHandlerClient.Disabled = false
+		end
+
 		self._Threads[threadIndex] = thread
 	end
 end
@@ -176,12 +182,6 @@ function Threader.Dispatch(self: Threader, workData: { [any]: any })
 				:catch(function(...)
 					reject(...)
 				end)
-
-			if isServer then
-				thread.ThreadHandlerServer.Disabled = false
-			else
-				thread.ThreadHandlerClient.Disabled = false
-			end
 
 			thread:SendMessage("Dispatch", (fragmentedData :: {})[index])
 		end
