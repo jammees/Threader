@@ -2,7 +2,7 @@
 name = "jammees/threader"
 description = "Promise based Actor wrapper."
 license = "MIT"
-version = "1.0.0"
+version = "1.0.1"
 registry = "https://github.com/UpliftGames/wally-index"
 realm = "shared"
 exclude = ["docs", "test", "vendors", "package-lock.json", "package.json"]
