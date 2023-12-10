@@ -10,16 +10,6 @@
   overflow: hidden;
 }
 
-@media screen and (max-width: 996px) {
-  .heroBanner {
-    padding: 2rem;
-  }
-
-  .showcaseImage {
-    width: 100%;
-  }
-}
-
 .buttons {
   display: flex;
   align-items: center;
@@ -49,3 +39,30 @@
   align-items: center;
 }
 
+b, strong {
+  color: #F36B9B
+}
+
+@media screen and (max-width: 996px) {
+  .heroBanner {
+    padding: 2rem;
+  }
+
+  .showcaseImage {
+    width: 100%;
+  }
+
+  .showcaseTextLeft {
+    font-weight: lighter;
+    text-align: center;
+  }
+  
+  .showcaseTextRight {
+    font-weight: lighter;
+    text-align: center;
+  }
+
+  .showcaseContainer {
+    flex-direction: column;
+  }
+}
