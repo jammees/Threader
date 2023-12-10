@@ -61,13 +61,6 @@ local function CreateThreadContainer()
 	folder.Name = GetCallerName()
 	folder.Parent = threadsContainer
 
-	-- Funny thing is
-	-- it cannot be guaranteed where Threader is placed
-	-- so a copy of Promise has to be made for each container
-	-- this is such a bad idea basically you would have 3 promises
-	-- but my hands were forced if I wanted to have intellisesnse
-	--PromiseModule:Clone().Parent = threadsContainer
-
 	return folder
 end
 
