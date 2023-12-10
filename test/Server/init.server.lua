@@ -1,4 +1,4 @@
-local Threader = require(game:GetService("ReplicatedStorage").Threader :: any)
+local Threader = require(game:GetService("ReplicatedStorage").Threader)
 
 local TerrainGenerationThreader = Threader.new(10, script.TerrainGeneratorWorker)
 
