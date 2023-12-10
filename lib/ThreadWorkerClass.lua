@@ -18,4 +18,9 @@ end
 function ThreadWorkerClass:OnDispatch(_data)
 	error("ThreadWorkerClass:OnDispatch() must be overridden!")
 end
+
+function ThreadWorkerClass:OnCancel()
+	warn("Threader:Cancel() was called but the default method was not overridden!")
+end
+
 return ThreadWorkerClass
